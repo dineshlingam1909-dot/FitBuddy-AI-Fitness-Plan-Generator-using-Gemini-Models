@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FitBuddy - Admin Dashboard
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<main class="container wide">
+
+    <a
+        href="/"
+        class="back"
+    >
+        ← Home
+    </a>
+
+
+    <section class="card">
+
+        <p class="eyebrow">
+            ADMIN DASHBOARD
+        </p>
+
+        <h1>
+            All Users
+        </h1>
+
+
+        {% if not users %}
+
+        <p>
+            No users have been registered yet.
+        </p>
+
+
+        {% else %}
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            User
+                        </th>
+
+                        <th>
+                            Profile
+                        </th>
+
+                        <th>
+                            Goal
+                        </th>
+
+                        <th>
+                            Intensity
+                        </th>
+
+                        <th>
+                            Workout Plan
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for user in users %}
+
+                    {% set plan =
+                        latest_by_user.get(user.user_id)
+                    %}
+
+
+                    <tr>
+
+                        <td>
+
+                            <strong>
+                                {{ user.name }}
+                            </strong>
+
+                            <br>
+
+                            {{ user.user_id }}
+
+                        </td>
+
+
+                        <td>
+
+                            {{ user.age }} years
+
+                            <br>
+
+                            {{ user.weight }} kg
+
+                        </td>
+
+
+                        <td>
+                            {{ user.goal }}
+                        </td>
+
+
+                        <td>
+                            {{ user.intensity }}
+                        </td>
+
+
+                        <td>
+
+                            {% if plan %}
+
+                            <details>
+
+                                <summary>
+                                    View Plan
+                                </summary>
+
+                                <pre class="mini">{{ plan.updated_plan or plan.original_plan }}</pre>
+
+                            </details>
+
+                            {% else %}
+
+                            No Plan
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

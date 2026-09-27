@@ -61,3 +61,5 @@ FitBuddy-AI/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
+## 🎬 Project Demo Video
+Watch the live demonstration of FitBuddy AI here: [FitBuddy AI Demo Video](https://drive.google.com/file/d/1Vd8kDwBLHwdAhosoShh2vGUn5CHFmsHW/view?usp=sharing)

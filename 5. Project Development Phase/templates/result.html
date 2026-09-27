@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitBuddy - Your Workout Plan</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+                        url('/static/images/gym-bg.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h2, h3 {
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .plan-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            margin-top: 15px;
+            color: #f1f5f9;
+        }
+
+        .tip-box {
+            background: rgba(59, 130, 246, 0.2);
+            border-left: 4px solid #3b82f6;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .alert {
+            background: rgba(34, 197, 94, 0.25);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            color: #4ade80;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        button, .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 12px 20px;
+            background: #3b82f6;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        button:hover, .btn:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔥 {{ username }}'s Personal Plan</h2>
+
+        {% if message %}
+            <div class="alert">{{ message }}</div>
+        {% endif %}
+
+        <div class="tip-box">
+            <strong>💡 Nutrition Tip:</strong> {{ nutrition_tip }}
+        </div>
+
+        <h3>Your Workout Routine:</h3>
+        <div class="plan-box">{{ workout_plan }}</div>
+
+        <hr style="border: 0.5px solid rgba(255, 255, 255, 0.2); margin-top: 25px;">
+
+        <h3>Need adjustments?</h3>
+        <form action="/update-workout" method="post">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <label for="feedback">Provide Feedback:</label>
+            <input type="text" id="feedback" name="feedback" placeholder="e.g., Make it shorter, or add more cardio" required>
+            <button type="submit">Update Plan</button>
+        </form>
+
+        <a href="/" class="btn" style="background: rgba(255, 255, 255, 0.2); margin-top: 20px;">← Back to Home</a>
+    </div>
+</body>
+</html>
